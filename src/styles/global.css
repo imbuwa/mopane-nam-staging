@@ -875,35 +875,84 @@ img {
 
   .menu-overlay {
     grid-template-columns: 1fr;
-    overflow-y: auto;
-    background: #111;
+    grid-template-rows: minmax(0, 1fr) auto;
+    overflow: hidden;
+    background: #101010;
   }
 
   .menu-visuals {
     inset: 0;
-    opacity: 0.86;
+    opacity: 0.54;
+  }
+
+  .menu-visuals::after {
+    background:
+      linear-gradient(180deg, rgba(10, 10, 10, 0.28), rgba(10, 10, 10, 0.06) 30%, rgba(10, 10, 10, 0.46) 66%, rgba(10, 10, 10, 0.9)),
+      linear-gradient(90deg, rgba(10, 10, 10, 0.42), rgba(10, 10, 10, 0.08) 52%, rgba(10, 10, 10, 0.32));
+  }
+
+  .menu-visuals::before {
+    opacity: 0.08;
+  }
+
+  .menu-visuals img {
+    object-position: 61% 20%;
+    filter: grayscale(0.18) saturate(0.82) brightness(0.98);
   }
 
   .menu-panel {
     width: auto;
-    margin: 122px 28px 32px;
-    align-content: start;
-    min-height: auto;
-    padding-bottom: 0;
+    min-height: 0;
+    margin: 0;
+    padding: clamp(96px, 16vh, 150px) 28px 22px;
+    align-content: end;
   }
 
   .menu-panel a {
-    font-size: clamp(38px, 9vw, 58px);
-    line-height: 1.08;
-    padding-block: 5px;
+    width: max-content;
+    max-width: 100%;
+    padding-block: 2px;
+    color: rgba(247, 247, 243, 0.3);
+    font-size: clamp(30px, 7.4vw, 40px);
+    line-height: 1.14;
   }
 
   .menu-details {
-    margin-top: auto;
-    gap: 24px;
-    padding: 42px 28px 64px;
-    background: rgba(21, 21, 21, 0.78);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-content: end;
+    gap: 18px 16px;
+    margin: 0;
+    padding: 25px 28px max(30px, env(safe-area-inset-bottom));
+    background:
+      linear-gradient(180deg, rgba(17, 17, 17, 0.62), rgba(17, 17, 17, 0.9));
     border-left: 0;
+    border-top: 1px solid rgba(247, 247, 243, 0.06);
+    transform: translateY(100%);
+    backdrop-filter: blur(12px);
+  }
+
+  .menu-overlay.is-open .menu-details {
+    transform: translateY(0);
+  }
+
+  .menu-details div:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .menu-details div {
+    gap: 8px;
+  }
+
+  .menu-details h2 {
+    font-size: 10px;
+    letter-spacing: 0.11em;
+  }
+
+  .menu-details a,
+  .menu-details p {
+    font-size: 11px;
+    line-height: 1.48;
   }
 }
 
@@ -981,20 +1030,22 @@ img {
   }
 
   .menu-panel {
-    margin: 104px 24px 28px;
+    padding: 106px 24px 20px;
   }
 
   .menu-panel a {
-    font-size: clamp(36px, 13vw, 52px);
+    font-size: clamp(30px, 9.2vw, 36px);
+    line-height: 1.14;
   }
 
   .menu-details {
-    padding: 36px 24px 52px;
+    gap: 15px 14px;
+    padding: 23px 24px max(28px, env(safe-area-inset-bottom));
   }
 
   .menu-details a,
   .menu-details p {
-    font-size: 13px;
+    font-size: 11px;
   }
 }
 
@@ -1035,18 +1086,18 @@ img {
   }
 
   .menu-panel {
-    margin: 84px 20px 12px;
+    padding: 96px 20px 18px;
   }
 
   .menu-panel a {
-    font-size: clamp(31px, 11vw, 40px);
-    line-height: 1.05;
-    padding-block: 3px;
+    font-size: clamp(29px, 9vw, 34px);
+    line-height: 1.13;
+    padding-block: 2px;
   }
 
   .menu-details {
-    gap: 14px;
-    padding: 22px 20px 34px;
+    gap: 14px 12px;
+    padding: 22px 20px max(26px, env(safe-area-inset-bottom));
   }
 
   .menu-details div {
@@ -1059,8 +1110,8 @@ img {
 
   .menu-details a,
   .menu-details p {
-    font-size: 12px;
-    line-height: 1.45;
+    font-size: 11px;
+    line-height: 1.42;
   }
 }
 
