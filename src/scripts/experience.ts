@@ -40,7 +40,6 @@ let cursorTargetX = cursorX;
 let cursorTargetY = cursorY;
 
 function splitText(element: Element) {
-  if (element.closest(".is-initial")) return;
   const text = element.textContent || "";
   element.textContent = "";
   Array.from(text).forEach((character, index) => {
@@ -98,7 +97,6 @@ function showSlide(nextIndex: number, direction: number) {
   if (isAnimating || nextIndex === activeSlide) return;
   isAnimating = true;
   stage?.classList.add("is-transitioning");
-  slides.forEach((slide) => slide.classList.remove("is-initial"));
 
   const resolvedIndex = (nextIndex + slides.length) % slides.length;
   const previousIndex = activeSlide;
