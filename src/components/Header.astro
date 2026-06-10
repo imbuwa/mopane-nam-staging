@@ -1,0 +1,21 @@
+---
+const basePath = import.meta.env.BASE_URL;
+---
+
+<header class="site-header" aria-label="Site header">
+  <a class="brand-lockup" href={basePath} aria-label="Mopane home">
+    <img src="assets/optimized/mopane-mark.png" alt="" width="256" height="256" decoding="async" />
+    <span>Mopane</span>
+  </a>
+  <button
+    class="menu-button"
+    type="button"
+    aria-label="Open menu"
+    aria-controls="site-menu"
+    aria-expanded="false"
+    data-menu-button
+  >
+    <span></span>
+    <span></span>
+  </button>
+</header>

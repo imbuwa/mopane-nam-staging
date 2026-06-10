@@ -1,0 +1,46 @@
+---
+import { contactDetails, menuItems, menuVisuals } from "@data/site";
+---
+
+<aside id="site-menu" class="menu-overlay" data-menu-overlay aria-label="Main menu" aria-hidden="true" inert>
+  <div class="menu-visuals" aria-hidden="true">
+    {
+      menuVisuals.map((visual, index) => (
+        <img
+          class:list={{ "is-active": index === 0 }}
+          src={visual.image}
+          alt=""
+          width={visual.width}
+          height={visual.height}
+          loading="lazy"
+          decoding="async"
+          data-menu-visual={visual.target}
+        />
+      ))
+    }
+  </div>
+  <nav class="menu-panel" aria-label="Primary">
+    {
+      menuItems.map((item) => (
+        <a href={item.href} data-menu-target={item.target}>
+          {item.label}
+        </a>
+      ))
+    }
+  </nav>
+  <div class="menu-details">
+    <div>
+      <h2>Phones</h2>
+      <a href={contactDetails.phoneHref}>{contactDetails.phone}</a>
+    </div>
+    <div>
+      <h2>E-mail</h2>
+      <a href={contactDetails.emailHref}>{contactDetails.email}</a>
+    </div>
+    <div>
+      <h2>Address</h2>
+      <p>{contactDetails.company}</p>
+      <p>{contactDetails.address}</p>
+    </div>
+  </div>
+</aside>

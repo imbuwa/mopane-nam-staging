@@ -1,0 +1,46 @@
+---
+import { slides } from "@data/site";
+---
+
+<main class="stage" id="home" data-stage data-transitioning="false">
+  {
+    slides.map((slide, index) => (
+      <section
+        class:list={{ slide: true, "is-active": index === 0, "is-initial": index === 0 }}
+        data-slide
+        data-route={slide.route}
+        aria-hidden={index === 0 ? "false" : "true"}
+        inert={index === 0 ? undefined : true}
+        style={`--image-position: ${slide.imagePosition}; --mobile-image-position: ${slide.mobileImagePosition};`}
+      >
+        <img
+          src={slide.image}
+          alt=""
+          width={slide.imageWidth}
+          height={slide.imageHeight}
+          loading={index === 0 ? "eager" : "lazy"}
+          fetchpriority={index === 0 ? "high" : "auto"}
+          decoding="async"
+        />
+        <div class="slide-copy">
+          <p class="slide-eyebrow">{slide.eyebrow}</p>
+          <h1 data-split>{slide.title}</h1>
+          <span class="slide-divider" aria-hidden="true"></span>
+          <p>{slide.body}</p>
+          <ul class="slide-proof" aria-label={`${slide.title} highlights`}>
+            {slide.proofPoints.map((point) => <li>{point}</li>)}
+          </ul>
+        </div>
+      </section>
+    ))
+  }
+
+  <div class="slide-controls" aria-label="Slide controls">
+    <button type="button" aria-label="Previous slide" data-slide-prev></button>
+    <button type="button" aria-label="Next slide" data-slide-next></button>
+  </div>
+  <button class="stage-prompt" type="button" aria-label="Scroll to next slide" data-stage-prompt>
+    <span></span>
+    <strong data-prompt-label>Scroll</strong>
+  </button>
+</main>
