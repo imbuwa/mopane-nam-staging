@@ -4,12 +4,15 @@ import "@styles/global.css";
 interface Props {
   title: string;
   description: string;
+  bodyClass?: string;
+  canonicalPath?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, bodyClass = "", canonicalPath = "" } = Astro.props;
 const siteUrl = import.meta.env.PUBLIC_SITE_URL || "https://www.mopane-nam.com/";
-const canonicalUrl = new URL(import.meta.env.BASE_URL, siteUrl).toString();
-const socialImage = new URL("assets/optimized/brand-guideline-cover.jpg", canonicalUrl).toString();
+const canonicalUrl = new URL(`${import.meta.env.BASE_URL}${canonicalPath}`.replace(/\/{2,}/g, "/"), siteUrl).toString();
+const socialImage = new URL(`${import.meta.env.BASE_URL}assets/optimized/brand-guideline-cover.jpg`.replace(/\/{2,}/g, "/"), siteUrl).toString();
+const favicon = `${import.meta.env.BASE_URL}assets/optimized/mopane-mark.png`;
 ---
 
 <!doctype html>
@@ -27,9 +30,9 @@ const socialImage = new URL("assets/optimized/brand-guideline-cover.jpg", canoni
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={socialImage} />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="icon" href="assets/optimized/mopane-mark.png" />
+    <link rel="icon" href={favicon} />
   </head>
-  <body>
+  <body class={bodyClass}>
     <slot />
   </body>
 </html>

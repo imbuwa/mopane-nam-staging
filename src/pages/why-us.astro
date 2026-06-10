@@ -1,0 +1,16 @@
+---
+import DetailPage from "@components/DetailPage.astro";
+import { detailPages } from "@data/site";
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+const page = detailPages.whyUs;
+---
+
+<BaseLayout
+  title="Why Us | Mopane Asset Management"
+  description="Discover Mopane Asset Management's local perspective, patient capital discipline, and considered client experience."
+  bodyClass="detail-body"
+  canonicalPath="why-us/"
+>
+  <DetailPage {...page} />
+</BaseLayout>

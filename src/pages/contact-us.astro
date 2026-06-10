@@ -1,0 +1,16 @@
+---
+import DetailPage from "@components/DetailPage.astro";
+import { detailPages } from "@data/site";
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+const page = detailPages.contact;
+---
+
+<BaseLayout
+  title="Contact Us | Mopane Asset Management"
+  description="Contact Mopane Asset Management in Windhoek for investment management conversations and client enquiries."
+  bodyClass="detail-body"
+  canonicalPath="contact-us/"
+>
+  <DetailPage {...page} contactForm />
+</BaseLayout>

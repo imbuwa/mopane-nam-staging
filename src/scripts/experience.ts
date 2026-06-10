@@ -30,6 +30,7 @@ const promptAriaLabels = [
   "Scroll to contact slide",
   "Return to welcome slide",
 ];
+const hasStage = Boolean(stage && slides.length);
 
 let activeSlide = 0;
 let isAnimating = false;
@@ -94,7 +95,7 @@ function toggleMenu() {
 }
 
 function showSlide(nextIndex: number, direction: number) {
-  if (isAnimating || nextIndex === activeSlide) return;
+  if (!hasStage || isAnimating || nextIndex === activeSlide) return;
   isAnimating = true;
   stage?.classList.add("is-transitioning");
 
@@ -128,6 +129,7 @@ function showSlide(nextIndex: number, direction: number) {
 }
 
 function moveSlide(direction: number) {
+  if (!hasStage) return;
   showSlide(activeSlide + direction, direction);
 }
 
@@ -138,6 +140,7 @@ function updatePrompt() {
 }
 
 function goToRoute(route: string) {
+  if (!hasStage) return;
   const targetIndex = slides.findIndex((slide) => slide.dataset.route === route);
   if (targetIndex < 0) return;
   const direction = targetIndex > activeSlide ? 1 : -1;
@@ -148,8 +151,9 @@ function goToRoute(route: string) {
 menuButton?.addEventListener("click", toggleMenu);
 menuLinks.forEach((link) => {
   link.addEventListener("click", (event) => {
-    event.preventDefault();
     closeMenu();
+    if (!hasStage) return;
+    event.preventDefault();
     const target = link.dataset.menuTarget;
     if (target) goToRoute(target);
   });
@@ -161,11 +165,19 @@ menuOverlay?.querySelectorAll<HTMLAnchorElement>(".menu-details a").forEach((lin
 
 prevButton?.addEventListener("click", () => moveSlide(-1));
 nextButton?.addEventListener("click", () => moveSlide(1));
-stagePrompt?.addEventListener("click", () => moveSlide(1));
+stagePrompt?.addEventListener("click", () => {
+  const activeDetailHref = slides[activeSlide]?.dataset.detailHref;
+  if (activeSlide > 0 && activeDetailHref) {
+    window.location.href = activeDetailHref;
+    return;
+  }
+  moveSlide(1);
+});
 
 window.addEventListener(
   "wheel",
   (event) => {
+    if (!hasStage) return;
     if (body.classList.contains("menu-open")) return;
     if (Math.abs(event.deltaY) < 32) return;
     event.preventDefault();
@@ -179,6 +191,7 @@ window.addEventListener("touchstart", (event) => {
 });
 
 window.addEventListener("touchend", (event) => {
+  if (!hasStage) return;
   const touchEndY = event.changedTouches[0]?.clientY || 0;
   const distance = touchStartY - touchEndY;
   if (Math.abs(distance) > 56) moveSlide(distance > 0 ? 1 : -1);
@@ -186,6 +199,7 @@ window.addEventListener("touchend", (event) => {
 
 window.addEventListener("keydown", (event) => {
   if (event.key === "Escape") closeMenu();
+  if (!hasStage) return;
   if (body.classList.contains("menu-open")) return;
   if (event.key === "ArrowDown" || event.key === "ArrowRight") moveSlide(1);
   if (event.key === "ArrowUp" || event.key === "ArrowLeft") moveSlide(-1);
@@ -203,7 +217,7 @@ menuLinks.forEach((link) => {
 
 menuLinks[0]?.classList.add("is-hovered");
 const initialRoute = window.location.hash.replace("#", "");
-if (initialRoute && initialRoute !== "home") {
+if (hasStage && initialRoute && initialRoute !== "home") {
   const initialIndex = slides.findIndex((slide) => slide.dataset.route === initialRoute);
   if (initialIndex > -1) {
     activeSlide = initialIndex;

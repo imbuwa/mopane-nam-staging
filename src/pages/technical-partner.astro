@@ -1,0 +1,16 @@
+---
+import DetailPage from "@components/DetailPage.astro";
+import { detailPages } from "@data/site";
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+const page = detailPages.technicalPartner;
+---
+
+<BaseLayout
+  title="Technical Partner | Mopane Asset Management"
+  description="Learn how Mopane Asset Management's technical partnership supports disciplined portfolio construction and client outcomes."
+  bodyClass="detail-body"
+  canonicalPath="technical-partner/"
+>
+  <DetailPage {...page} />
+</BaseLayout>

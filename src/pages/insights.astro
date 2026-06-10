@@ -1,0 +1,16 @@
+---
+import DetailPage from "@components/DetailPage.astro";
+import { detailPages } from "@data/site";
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+const page = detailPages.insights;
+---
+
+<BaseLayout
+  title="Insights | Mopane Asset Management"
+  description="Read Mopane Asset Management market notes and investment perspective shaped for long-term Namibian capital."
+  bodyClass="detail-body"
+  canonicalPath="insights/"
+>
+  <DetailPage {...page} />
+</BaseLayout>

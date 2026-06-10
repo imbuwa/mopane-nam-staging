@@ -1,0 +1,108 @@
+---
+import Header from "@components/Header.astro";
+import MenuOverlay from "@components/MenuOverlay.astro";
+import CursorRing from "@components/CursorRing.astro";
+
+type Pillar = {
+  label: string;
+  text: string;
+};
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  summary: string;
+  image: string;
+  imageWidth: number;
+  imageHeight: number;
+  intro: string;
+  pillars: readonly Pillar[];
+  featureTitle: string;
+  featureText: string;
+  ctaLabel: string;
+  ctaHref: string;
+  contactForm?: boolean;
+}
+
+const page = Astro.props;
+const basePath = import.meta.env.BASE_URL;
+const resolveUrl = (href: string) => {
+  if (/^(https?:|mailto:|tel:|#)/.test(href)) return href;
+  return href.startsWith("/") ? `${basePath}${href.slice(1)}` : `${basePath}${href}`;
+};
+---
+
+<Header />
+<MenuOverlay />
+
+<main class="detail-page">
+  <section class="detail-hero" aria-labelledby="page-title">
+    <img
+      src={resolveUrl(page.image)}
+      alt=""
+      width={page.imageWidth}
+      height={page.imageHeight}
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+    />
+    <div class="detail-hero-copy">
+      <p class="detail-eyebrow">{page.eyebrow}</p>
+      <h1 id="page-title">{page.title}</h1>
+      <span class="slide-divider" aria-hidden="true"></span>
+      <p>{page.summary}</p>
+    </div>
+  </section>
+
+  <section class="detail-intro" aria-label={`${page.eyebrow} overview`}>
+    <p>{page.intro}</p>
+  </section>
+
+  <section class="detail-grid" aria-label={`${page.eyebrow} details`}>
+    {
+      page.pillars.map((pillar) => (
+        <article>
+          <span>{pillar.label}</span>
+          <p>{pillar.text}</p>
+        </article>
+      ))
+    }
+  </section>
+
+  <section class="detail-feature" aria-label={`${page.eyebrow} feature`}>
+    <div>
+      <p class="detail-eyebrow">{page.eyebrow}</p>
+      <h2>{page.featureTitle}</h2>
+    </div>
+    <p>{page.featureText}</p>
+  </section>
+
+  {
+    page.contactForm ? (
+      <section class="detail-contact" aria-label="Contact form">
+        <form action={resolveUrl("/contact.php")} method="post">
+          <label>
+            <span>Name</span>
+            <input name="name" autocomplete="name" required />
+          </label>
+          <label>
+            <span>E-mail</span>
+            <input type="email" name="email" autocomplete="email" required />
+          </label>
+          <label>
+            <span>Message</span>
+            <textarea name="message" rows="5" required></textarea>
+          </label>
+          <button type="submit">{page.ctaLabel}</button>
+        </form>
+      </section>
+    ) : (
+      <section class="detail-cta" aria-label="Next step">
+        <a href={resolveUrl(page.ctaHref)}>{page.ctaLabel}</a>
+      </section>
+    )
+  }
+</main>
+
+<CursorRing />
+<script src="../scripts/experience.ts"></script>

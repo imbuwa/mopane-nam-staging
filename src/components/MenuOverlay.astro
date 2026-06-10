@@ -1,5 +1,11 @@
 ---
 import { contactDetails, menuItems, menuVisuals } from "@data/site";
+
+const basePath = import.meta.env.BASE_URL;
+const resolveUrl = (href: string) => {
+  if (/^(https?:|mailto:|tel:|#)/.test(href)) return href;
+  return href.startsWith("/") ? `${basePath}${href.slice(1)}` : `${basePath}${href}`;
+};
 ---
 
 <aside id="site-menu" class="menu-overlay" data-menu-overlay aria-label="Main menu" aria-hidden="true" inert>
@@ -8,7 +14,7 @@ import { contactDetails, menuItems, menuVisuals } from "@data/site";
       menuVisuals.map((visual, index) => (
         <img
           class:list={{ "is-active": index === 0 }}
-          src={visual.image}
+          src={resolveUrl(visual.image)}
           alt=""
           width={visual.width}
           height={visual.height}
@@ -22,7 +28,7 @@ import { contactDetails, menuItems, menuVisuals } from "@data/site";
   <nav class="menu-panel" aria-label="Primary">
     {
       menuItems.map((item) => (
-        <a href={item.href} data-menu-target={item.target}>
+        <a href={resolveUrl(item.href)} data-menu-target={item.target}>
           {item.label}
         </a>
       ))
