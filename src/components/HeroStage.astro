@@ -23,13 +23,9 @@ import { slides } from "@data/site";
           decoding="async"
         />
         <div class="slide-copy">
-          <p class="slide-eyebrow">{slide.eyebrow}</p>
           <h1 data-split>{slide.title}</h1>
           <span class="slide-divider" aria-hidden="true"></span>
           <p>{slide.body}</p>
-          <ul class="slide-proof" aria-label={`${slide.title} highlights`}>
-            {slide.proofPoints.map((point) => <li>{point}</li>)}
-          </ul>
         </div>
       </section>
     ))
