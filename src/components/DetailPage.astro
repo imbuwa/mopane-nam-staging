@@ -9,6 +9,7 @@ type Pillar = {
 };
 
 interface Props {
+  pageNumber: string;
   eyebrow: string;
   title: string;
   summary: string;
@@ -21,6 +22,8 @@ interface Props {
   featureText: string;
   ctaLabel: string;
   ctaHref: string;
+  nextLabel: string;
+  nextHref: string;
   contactForm?: boolean;
 }
 
@@ -52,16 +55,26 @@ const resolveUrl = (href: string) => {
       <span class="slide-divider" aria-hidden="true"></span>
       <p>{page.summary}</p>
     </div>
+    <div class="detail-hero-meta" aria-hidden="true">
+      <span>{page.pageNumber}</span>
+      <span>{page.eyebrow}</span>
+    </div>
+    <a class="detail-scroll" href="#detail-content" aria-label={`Continue reading ${page.eyebrow}`}>
+      <span></span>
+      <strong>Read</strong>
+    </a>
   </section>
 
-  <section class="detail-intro" aria-label={`${page.eyebrow} overview`}>
+  <section id="detail-content" class="detail-intro" aria-label={`${page.eyebrow} overview`}>
+    <span>Perspective</span>
     <p>{page.intro}</p>
   </section>
 
   <section class="detail-grid" aria-label={`${page.eyebrow} details`}>
     {
-      page.pillars.map((pillar) => (
+      page.pillars.map((pillar, index) => (
         <article>
+          <small>{String(index + 1).padStart(2, "0")}</small>
           <span>{pillar.label}</span>
           <p>{pillar.text}</p>
         </article>
@@ -102,6 +115,13 @@ const resolveUrl = (href: string) => {
       </section>
     )
   }
+
+  <nav class="detail-next" aria-label="Continue exploring">
+    <a href={resolveUrl(page.nextHref)}>
+      <span>Next</span>
+      <strong>{page.nextLabel}</strong>
+    </a>
+  </nav>
 </main>
 
 <CursorRing />

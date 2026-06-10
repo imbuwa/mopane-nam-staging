@@ -707,7 +707,7 @@ img {
   position: relative;
   display: grid;
   min-height: 100vh;
-  padding: clamp(160px, 18vh, 230px) clamp(28px, 7vw, 118px) clamp(92px, 12vh, 150px);
+  padding: clamp(160px, 18vh, 230px) clamp(28px, 7vw, 118px) clamp(108px, 13vh, 168px);
   align-items: end;
   overflow: hidden;
   isolation: isolate;
@@ -725,8 +725,8 @@ img {
   z-index: -1;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(10, 10, 10, 0.58), rgba(10, 10, 10, 0.08) 48%, rgba(10, 10, 10, 0.52)),
-    linear-gradient(180deg, rgba(10, 10, 10, 0.08), rgba(10, 10, 10, 0.68));
+    linear-gradient(90deg, rgba(10, 10, 10, 0.62), rgba(10, 10, 10, 0.08) 52%, rgba(10, 10, 10, 0.44)),
+    linear-gradient(180deg, rgba(10, 10, 10, 0.06), rgba(10, 10, 10, 0.7));
 }
 
 .detail-hero img {
@@ -745,6 +745,27 @@ img {
 .detail-hero-copy {
   width: min(980px, 100%);
   animation: detailRise 980ms var(--ease-premium) both 160ms;
+}
+
+.detail-hero-meta {
+  position: absolute;
+  right: clamp(28px, 7vw, 118px);
+  bottom: clamp(102px, 12vh, 150px);
+  display: grid;
+  gap: 11px;
+  color: rgba(247, 247, 243, 0.46);
+  font-family: Futura, Avenir Next, sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-align: right;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.detail-hero-meta span:first-child {
+  color: var(--tan);
 }
 
 .detail-eyebrow {
@@ -787,34 +808,100 @@ img {
   line-height: 1.62;
 }
 
+.detail-scroll {
+  position: absolute;
+  left: clamp(28px, 7vw, 118px);
+  bottom: clamp(34px, 5vh, 58px);
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  color: rgba(183, 154, 104, 0.88);
+  font-family: Futura, Avenir Next, sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.detail-scroll span {
+  width: 52px;
+  height: 1px;
+  background:
+    linear-gradient(90deg, rgba(183, 154, 104, 0.24), rgba(183, 154, 104, 0.94), rgba(183, 154, 104, 0.24));
+  background-size: 220% 100%;
+  animation: accentLine 2600ms var(--ease-premium) infinite;
+}
+
 .detail-intro {
-  padding: clamp(76px, 10vw, 150px) clamp(28px, 7vw, 118px) clamp(44px, 6vw, 90px);
+  display: grid;
+  grid-template-columns: minmax(120px, 0.22fr) minmax(0, 0.78fr);
+  gap: clamp(34px, 6vw, 104px);
+  padding: clamp(82px, 10vw, 154px) clamp(28px, 7vw, 118px) clamp(52px, 6vw, 96px);
+  scroll-margin-top: 150px;
+}
+
+.detail-intro > span {
+  color: var(--tan);
+  font-family: Futura, Avenir Next, sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 .detail-intro p {
-  width: min(940px, 100%);
+  width: min(980px, 100%);
   margin: 0;
   color: rgba(247, 247, 243, 0.86);
-  font-family: Futura, Avenir Next, Montserrat, sans-serif;
-  font-size: clamp(27px, 3.6vw, 58px);
-  font-weight: 800;
-  line-height: 1.08;
+  font-size: clamp(20px, 2.4vw, 34px);
+  font-weight: 600;
+  line-height: 1.46;
   text-wrap: balance;
 }
 
 .detail-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1px;
+  gap: clamp(14px, 1.4vw, 22px);
   padding: 0 clamp(28px, 7vw, 118px) clamp(64px, 8vw, 128px);
 }
 
 .detail-grid article {
+  position: relative;
   min-height: 280px;
   padding: clamp(28px, 3.6vw, 58px);
   background:
-    linear-gradient(180deg, rgba(247, 247, 243, 0.055), rgba(247, 247, 243, 0.025));
+    linear-gradient(180deg, rgba(247, 247, 243, 0.064), rgba(247, 247, 243, 0.018));
   border: 1px solid rgba(247, 247, 243, 0.075);
+  overflow: hidden;
+}
+
+.detail-grid article::after {
+  content: "";
+  position: absolute;
+  left: clamp(28px, 3.6vw, 58px);
+  right: clamp(28px, 3.6vw, 58px);
+  bottom: 34px;
+  height: 1px;
+  background: rgba(183, 154, 104, 0.28);
+  transform: scaleX(0.38);
+  transform-origin: left;
+  transition: transform 520ms var(--ease-premium);
+}
+
+.detail-grid article:hover::after {
+  transform: scaleX(1);
+}
+
+.detail-grid small {
+  position: absolute;
+  top: clamp(24px, 3vw, 46px);
+  right: clamp(24px, 3vw, 46px);
+  color: rgba(247, 247, 243, 0.16);
+  font-family: Futura, Avenir Next, sans-serif;
+  font-size: clamp(38px, 4vw, 68px);
+  font-weight: 800;
+  line-height: 1;
 }
 
 .detail-grid span {
@@ -842,8 +929,8 @@ img {
   align-items: end;
   padding: clamp(72px, 9vw, 138px) clamp(28px, 7vw, 118px);
   background:
-    linear-gradient(90deg, rgba(36, 75, 57, 0.32), rgba(183, 154, 104, 0.08)),
-    #151515;
+    linear-gradient(90deg, rgba(36, 75, 57, 0.28), rgba(183, 154, 104, 0.07)),
+    linear-gradient(180deg, #151515, #111);
   border-top: 1px solid rgba(247, 247, 243, 0.075);
   border-bottom: 1px solid rgba(247, 247, 243, 0.075);
 }
@@ -951,6 +1038,40 @@ img {
   grid-column: 1 / -1;
   margin-top: 12px;
   padding: 0;
+}
+
+.detail-next {
+  padding: 0 clamp(28px, 7vw, 118px) clamp(72px, 8vw, 126px);
+}
+
+.detail-next a {
+  display: grid;
+  gap: 18px;
+  padding: clamp(34px, 5vw, 72px) 0 0;
+  border-top: 1px solid rgba(247, 247, 243, 0.1);
+}
+
+.detail-next span {
+  color: var(--tan);
+  font-family: Futura, Avenir Next, sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.detail-next strong {
+  color: rgba(247, 247, 243, 0.88);
+  font-family: Futura, Avenir Next, Montserrat, sans-serif;
+  font-size: clamp(34px, 4.8vw, 82px);
+  font-weight: 800;
+  line-height: 0.98;
+  transition: color 320ms ease, transform 520ms var(--ease-premium);
+}
+
+.detail-next a:hover strong {
+  color: var(--white);
+  transform: translateX(12px);
 }
 
 @keyframes detailRise {
@@ -1173,7 +1294,7 @@ img {
 
   .detail-hero {
     min-height: 780px;
-    padding: 136px 28px 82px;
+    padding: 136px 28px 88px;
   }
 
   .detail-hero::before {
@@ -1187,23 +1308,46 @@ img {
     line-height: 0.96;
   }
 
+  .detail-hero-meta {
+    right: 28px;
+    bottom: 84px;
+    font-size: 10px;
+  }
+
+  .detail-scroll {
+    left: 28px;
+    bottom: 34px;
+  }
+
   .detail-intro {
-    padding: 74px 28px 38px;
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 72px 28px 38px;
   }
 
   .detail-intro p {
-    font-size: clamp(25px, 5.8vw, 38px);
-    line-height: 1.16;
+    font-size: clamp(19px, 4.4vw, 25px);
+    font-weight: 500;
+    line-height: 1.48;
   }
 
   .detail-grid {
     grid-template-columns: 1fr;
+    gap: 14px;
     padding: 0 28px 72px;
   }
 
   .detail-grid article {
     min-height: 0;
     padding: 34px 28px;
+  }
+
+  .detail-grid article::after {
+    display: none;
+  }
+
+  .detail-grid small {
+    font-size: 44px;
   }
 
   .detail-grid p {
@@ -1227,6 +1371,10 @@ img {
 
   .detail-contact form {
     grid-template-columns: 1fr;
+  }
+
+  .detail-next {
+    padding: 0 28px 86px;
   }
 
   .menu-overlay {
@@ -1387,7 +1535,7 @@ img {
 
   .detail-hero {
     min-height: 720px;
-    padding: 126px 24px 76px;
+    padding: 126px 24px 82px;
   }
 
   .detail-hero img {
@@ -1403,13 +1551,23 @@ img {
     font-size: clamp(39px, 12vw, 54px);
   }
 
+  .detail-hero-meta {
+    display: none;
+  }
+
+  .detail-scroll {
+    left: 24px;
+    bottom: 30px;
+    font-size: 10px;
+  }
+
   .detail-hero-copy > p:last-child {
     font-size: 15px;
     line-height: 1.6;
   }
 
   .detail-intro {
-    padding: 58px 24px 34px;
+    padding: 56px 24px 34px;
   }
 
   .detail-grid {
@@ -1427,6 +1585,14 @@ img {
   .detail-contact,
   .detail-cta {
     padding: 62px 24px 84px;
+  }
+
+  .detail-next {
+    padding: 0 24px 78px;
+  }
+
+  .detail-next strong {
+    font-size: clamp(30px, 9vw, 42px);
   }
 
   .menu-panel {
@@ -1487,7 +1653,7 @@ img {
 
   .detail-hero {
     min-height: 680px;
-    padding: 112px 20px 68px;
+    padding: 112px 20px 76px;
   }
 
   .detail-hero h1 {
@@ -1496,19 +1662,28 @@ img {
 
   .detail-hero-copy > p:last-child {
     font-size: 14px;
+    line-height: 1.55;
   }
 
   .detail-intro {
-    padding: 54px 20px 30px;
+    padding: 50px 20px 30px;
   }
 
   .detail-intro p {
-    font-size: clamp(23px, 6.8vw, 29px);
-    line-height: 1.18;
+    font-size: clamp(18px, 4.8vw, 20px);
+    line-height: 1.5;
   }
 
   .detail-grid {
     padding: 0 20px 56px;
+  }
+
+  .detail-grid article {
+    padding: 28px 22px;
+  }
+
+  .detail-grid p {
+    margin-top: 28px;
   }
 
   .detail-feature {
@@ -1518,6 +1693,10 @@ img {
   .detail-contact,
   .detail-cta {
     padding: 56px 20px 78px;
+  }
+
+  .detail-next {
+    padding: 0 20px 72px;
   }
 
   .menu-panel {

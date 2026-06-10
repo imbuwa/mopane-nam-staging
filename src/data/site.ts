@@ -73,6 +73,7 @@ export const menuVisuals = [
 
 export const detailPages = {
   technicalPartner: {
+    pageNumber: "01 / 04",
     eyebrow: "Technical Partner",
     title: "Depth beyond the local desk",
     summary:
@@ -101,8 +102,11 @@ export const detailPages = {
       "Clients should feel the benefit of depth, not the complexity behind it. The technical partnership supports the work in the background while Mopane keeps the experience personal, clear, and accountable.",
     ctaLabel: "Start a conversation",
     ctaHref: "/contact-us/",
+    nextLabel: "Why Us",
+    nextHref: "/why-us/",
   },
   whyUs: {
+    pageNumber: "02 / 04",
     eyebrow: "Why Us",
     title: "Stewardship with local conviction",
     summary:
@@ -131,8 +135,11 @@ export const detailPages = {
       "Markets move. A considered advisor helps clients separate signal from noise, stay aligned to their objectives, and act only when action is warranted.",
     ctaLabel: "Explore insights",
     ctaHref: "/insights/",
+    nextLabel: "Insights",
+    nextHref: "/insights/",
   },
   insights: {
+    pageNumber: "03 / 04",
     eyebrow: "Insights",
     title: "Thinking shaped for long-term capital",
     summary:
@@ -161,8 +168,11 @@ export const detailPages = {
       "The strongest insights pages do not chase volume. They publish fewer, sharper pieces that make the firm feel thoughtful and trusted.",
     ctaLabel: "Contact Mopane",
     ctaHref: "/contact-us/",
+    nextLabel: "Contact Us",
+    nextHref: "/contact-us/",
   },
   contact: {
+    pageNumber: "04 / 04",
     eyebrow: "Contact Us",
     title: "Begin with a considered conversation",
     summary:
@@ -191,5 +201,7 @@ export const detailPages = {
       "Located at 1 Ardeco Offices, Nelson Mandela Avenue, Klein Windhoek, Windhoek, Namibia.",
     ctaLabel: "E-mail Mopane",
     ctaHref: contactDetails.emailHref,
+    nextLabel: "Return Home",
+    nextHref: "/",
   },
 } as const;
