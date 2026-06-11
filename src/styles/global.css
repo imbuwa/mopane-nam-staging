@@ -1542,6 +1542,11 @@ img {
     opacity: 0.74;
   }
 
+  .slide[data-route="services"] img,
+  .detail-hero img[src$="technical-partner.jpg"] {
+    object-position: 92% center;
+  }
+
   .detail-eyebrow {
     margin-bottom: 15px;
     font-size: 10px;
