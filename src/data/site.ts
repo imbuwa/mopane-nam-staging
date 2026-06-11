@@ -27,9 +27,9 @@ export const slides = [
   },
   {
     route: "services",
-    image: "assets/optimized/menu-corporate.jpg",
-    imageWidth: 1800,
-    imageHeight: 1200,
+    image: "assets/optimized/technical-partner.jpg",
+    imageWidth: 1280,
+    imageHeight: 720,
     title: "Technical Partner",
     body: "Get to know more about our technical partner: Fairtree Asset Management.",
     detailHref: "/technical-partner/",
@@ -65,7 +65,7 @@ export const slides = [
 
 export const menuVisuals = [
   { target: "home", image: "assets/optimized/menu-corporate.jpg", width: 1800, height: 1200 },
-  { target: "services", image: "assets/optimized/mopane-texture.jpg", width: 1600, height: 1066 },
+  { target: "services", image: "assets/optimized/technical-partner.jpg", width: 1280, height: 720 },
   { target: "why", image: "assets/optimized/brand-guideline-cover.jpg", width: 1200, height: 675 },
   { target: "blog", image: "assets/optimized/team-screenshot.jpg", width: 1400, height: 1181 },
   { target: "contacts", image: "assets/optimized/menu-corporate.jpg", width: 1800, height: 1200 },
@@ -78,9 +78,9 @@ export const detailPages = {
     title: "Depth beyond the local desk",
     summary:
       "Mopane pairs Namibian proximity with the institutional research depth of Fairtree Asset Management, giving clients a broader investment lens without losing local accountability.",
-    image: "assets/optimized/menu-corporate.jpg",
-    imageWidth: 1800,
-    imageHeight: 1200,
+    image: "assets/optimized/technical-partner.jpg",
+    imageWidth: 1280,
+    imageHeight: 720,
     intro:
       "The right technical partner should make the investment process quieter, sharper, and more resilient. Fairtree brings established portfolio management capability, research discipline, and market infrastructure that complements Mopane's client-facing presence in Namibia.",
     pillars: [
