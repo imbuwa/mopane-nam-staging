@@ -1,0 +1,45 @@
+---
+import LegalPage from "@components/LegalPage.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+const sections = [
+  {
+    title: "Information we collect",
+    body: "When you contact Mopane through this website, we may collect your name, e-mail address, phone number, message, and any information you choose to provide. We also receive basic technical information required to deliver the website, such as browser and device information.",
+  },
+  {
+    title: "How information is used",
+    body: "Information submitted through the website is used to respond to enquiries, manage client or prospective client communication, maintain website security, and improve the clarity and usefulness of the website experience.",
+  },
+  {
+    title: "Sharing of information",
+    body: "Mopane does not sell personal information. Information may be shared only with service providers who help operate the website or respond to enquiries, or where disclosure is required by law or regulation.",
+  },
+  {
+    title: "Retention",
+    body: "Personal information is retained only for as long as it is reasonably required for the purpose it was collected, for legitimate business records, or to meet legal and regulatory obligations.",
+  },
+  {
+    title: "Your rights",
+    body: "You may request access to, correction of, or deletion of personal information held about you, subject to applicable law. Requests can be sent to info@mopane-nam.com.",
+  },
+  {
+    title: "Contact",
+    body: "For privacy-related questions, contact Mopane Asset Management (Pty) Ltd at info@mopane-nam.com or +264 61 248 029.",
+  },
+] as const;
+---
+
+<BaseLayout
+  title="Privacy Policy | Mopane Asset Management"
+  description="Privacy policy for Mopane Asset Management's website and enquiry handling."
+  bodyClass="detail-body"
+  canonicalPath="privacy-policy/"
+>
+  <LegalPage
+    eyebrow="Privacy"
+    title="Privacy Policy"
+    intro="This policy explains how Mopane Asset Management handles personal information submitted through this website."
+    sections={sections}
+  />
+</BaseLayout>

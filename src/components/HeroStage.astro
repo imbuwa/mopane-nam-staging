@@ -1,5 +1,6 @@
 ---
 import { slides } from "@data/site";
+import StageFooter from "@components/StageFooter.astro";
 
 const basePath = import.meta.env.BASE_URL;
 const resolveUrl = (href: string) => {
@@ -49,4 +50,5 @@ const resolveUrl = (href: string) => {
     <span></span>
     <strong data-prompt-label>Scroll</strong>
   </button>
+  <StageFooter />
 </main>

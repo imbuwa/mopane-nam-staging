@@ -1,0 +1,37 @@
+---
+import LegalPage from "@components/LegalPage.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+const sections = [
+  {
+    title: "Current cookie use",
+    body: "This website currently uses only essential browser storage for basic preferences, such as remembering whether a visitor has acknowledged the privacy notice. These preferences do not profile visitors.",
+  },
+  {
+    title: "Analytics and tracking",
+    body: "The website is prepared for consent controls if analytics, advertising pixels, embedded media, or other non-essential tracking tools are added in future. Those tools should not run before appropriate consent is collected.",
+  },
+  {
+    title: "Managing preferences",
+    body: "You can clear website preferences through your browser settings at any time. If a full cookie preference centre is enabled later, this page should be updated with direct controls.",
+  },
+  {
+    title: "Updates",
+    body: "This cookie policy may be updated when website functionality changes, especially if analytics, maps, embedded content, or marketing tools are introduced.",
+  },
+] as const;
+---
+
+<BaseLayout
+  title="Cookie Policy | Mopane Asset Management"
+  description="Cookie policy for Mopane Asset Management's website."
+  bodyClass="detail-body"
+  canonicalPath="cookie-policy/"
+>
+  <LegalPage
+    eyebrow="Cookies"
+    title="Cookie Policy"
+    intro="This page explains the current use of essential storage and how consent controls will apply if non-essential tools are added."
+    sections={sections}
+  />
+</BaseLayout>

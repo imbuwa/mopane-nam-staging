@@ -22,17 +22,23 @@ const menuLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data
 const menuVisuals = Array.from(document.querySelectorAll<HTMLImageElement>("[data-menu-visual]"));
 const menuDetailGroups = Array.from(document.querySelectorAll<HTMLElement>(".menu-details div"));
 const stage = document.querySelector<HTMLElement>("[data-stage]");
-const promptLabels = ["Scroll", "Explore Partner", "Why Mopane", "Read Insights", "Start Conversation"];
+const stageFooter = document.querySelector<HTMLElement>("[data-stage-footer]");
+const cookieNotice = document.querySelector<HTMLElement>("[data-cookie-notice]");
+const cookieAccept = document.querySelector<HTMLButtonElement>("[data-cookie-accept]");
+const promptLabels = ["Scroll", "Explore Partner", "Why Mopane", "Read Insights", "Start Conversation", "Footer"];
 const promptAriaLabels = [
   "Scroll to services slide",
   "Scroll to why us slide",
   "Scroll to insights slide",
   "Scroll to contact slide",
-  "Return to welcome slide",
+  "Scroll to footer",
+  "Footer",
 ];
 const hasStage = Boolean(stage && slides.length);
+const footerIndex = stageFooter ? slides.length : -1;
+const panelCount = slides.length + (stageFooter ? 1 : 0);
 
-let activeSlide = 0;
+let activePanel = 0;
 let isAnimating = false;
 let touchStartY = 0;
 let cursorX = window.innerWidth / 2;
@@ -58,7 +64,7 @@ menuDetailGroups.forEach((group, index) => group.style.setProperty("--detail-ind
 
 function updateSlideAccessibility() {
   slides.forEach((slide, index) => {
-    const isActive = index === activeSlide;
+    const isActive = index === activePanel;
     slide.setAttribute("aria-hidden", isActive ? "false" : "true");
     if (isActive) {
       slide.removeAttribute("inert");
@@ -66,6 +72,20 @@ function updateSlideAccessibility() {
       slide.setAttribute("inert", "");
     }
   });
+  if (stageFooter) {
+    const footerActive = activePanel === footerIndex;
+    stageFooter.classList.toggle("is-active", footerActive);
+    stageFooter.setAttribute("aria-hidden", footerActive ? "false" : "true");
+    if (footerActive) {
+      stageFooter.removeAttribute("inert");
+    } else {
+      stageFooter.setAttribute("inert", "");
+    }
+  }
+  stage?.classList.toggle("is-footer-active", activePanel === footerIndex);
+  body.classList.toggle("footer-active", activePanel === footerIndex);
+  prevButton?.toggleAttribute("disabled", activePanel === 0);
+  nextButton?.toggleAttribute("disabled", activePanel === panelCount - 1);
 }
 
 function openMenu() {
@@ -95,13 +115,14 @@ function toggleMenu() {
 }
 
 function showSlide(nextIndex: number, direction: number) {
-  if (!hasStage || isAnimating || nextIndex === activeSlide) return;
+  if (!hasStage || isAnimating || nextIndex === activePanel) return;
+  const resolvedIndex = Math.max(0, Math.min(nextIndex, panelCount - 1));
+  if (resolvedIndex === activePanel) return;
   isAnimating = true;
   stage?.classList.add("is-transitioning");
 
-  const resolvedIndex = (nextIndex + slides.length) % slides.length;
-  const previousIndex = activeSlide;
-  activeSlide = resolvedIndex;
+  const previousIndex = activePanel;
+  activePanel = resolvedIndex;
   updateSlideAccessibility();
   window.setTimeout(updatePrompt, 420);
 
@@ -110,18 +131,20 @@ function showSlide(nextIndex: number, direction: number) {
     if (index === previousIndex && direction > 0) {
       slide.classList.add("is-before");
     }
-    if (index === activeSlide && direction < 0) {
+    if (index === activePanel && direction < 0) {
       slide.classList.add("is-before");
     }
   });
 
   requestAnimationFrame(() => {
-    slides[activeSlide]?.classList.add("is-active");
+    if (activePanel < slides.length) {
+      slides[activePanel]?.classList.add("is-active");
+    }
   });
 
   window.setTimeout(() => {
     slides.forEach((slide, index) => {
-      slide.classList.toggle("is-before", index < activeSlide);
+      slide.classList.toggle("is-before", index < activePanel || activePanel === footerIndex);
     });
     stage?.classList.remove("is-transitioning");
     isAnimating = false;
@@ -130,20 +153,20 @@ function showSlide(nextIndex: number, direction: number) {
 
 function moveSlide(direction: number) {
   if (!hasStage) return;
-  showSlide(activeSlide + direction, direction);
+  showSlide(activePanel + direction, direction);
 }
 
 function updatePrompt() {
   if (!promptLabel) return;
-  promptLabel.textContent = promptLabels[activeSlide] || "Scroll";
-  stagePrompt?.setAttribute("aria-label", promptAriaLabels[activeSlide] || "Scroll to next slide");
+  promptLabel.textContent = promptLabels[activePanel] || "Scroll";
+  stagePrompt?.setAttribute("aria-label", promptAriaLabels[activePanel] || "Scroll to next slide");
 }
 
 function goToRoute(route: string) {
   if (!hasStage) return;
   const targetIndex = slides.findIndex((slide) => slide.dataset.route === route);
   if (targetIndex < 0) return;
-  const direction = targetIndex > activeSlide ? 1 : -1;
+  const direction = targetIndex > activePanel ? 1 : -1;
   showSlide(targetIndex, direction);
   window.history.replaceState(null, "", route === "home" ? "#home" : `#${route}`);
 }
@@ -166,8 +189,9 @@ menuOverlay?.querySelectorAll<HTMLAnchorElement>(".menu-details a").forEach((lin
 prevButton?.addEventListener("click", () => moveSlide(-1));
 nextButton?.addEventListener("click", () => moveSlide(1));
 stagePrompt?.addEventListener("click", () => {
-  const activeDetailHref = slides[activeSlide]?.dataset.detailHref;
-  if (activeSlide > 0 && activeDetailHref) {
+  if (activePanel === footerIndex) return;
+  const activeDetailHref = slides[activePanel]?.dataset.detailHref;
+  if (activePanel > 0 && activePanel < slides.length - 1 && activeDetailHref) {
     window.location.href = activeDetailHref;
     return;
   }
@@ -220,15 +244,28 @@ const initialRoute = window.location.hash.replace("#", "");
 if (hasStage && initialRoute && initialRoute !== "home") {
   const initialIndex = slides.findIndex((slide) => slide.dataset.route === initialRoute);
   if (initialIndex > -1) {
-    activeSlide = initialIndex;
+    activePanel = initialIndex;
     slides.forEach((slide, index) => {
-      slide.classList.toggle("is-active", index === activeSlide);
-      slide.classList.toggle("is-before", index < activeSlide);
+      slide.classList.toggle("is-active", index === activePanel);
+      slide.classList.toggle("is-before", index < activePanel);
     });
   }
 }
 updatePrompt();
 updateSlideAccessibility();
+
+if (cookieNotice && window.localStorage.getItem("mopanePrivacyNotice") !== "accepted") {
+  cookieNotice.hidden = false;
+  window.setTimeout(() => cookieNotice.classList.add("is-visible"), 420);
+}
+
+cookieAccept?.addEventListener("click", () => {
+  window.localStorage.setItem("mopanePrivacyNotice", "accepted");
+  cookieNotice?.classList.remove("is-visible");
+  window.setTimeout(() => {
+    if (cookieNotice) cookieNotice.hidden = true;
+  }, 360);
+});
 
 window.addEventListener("mousemove", (event) => {
   if (!cursorRing || !hasFinePointer) return;
