@@ -25,9 +25,9 @@ const stage = document.querySelector<HTMLElement>("[data-stage]");
 const stageFooter = document.querySelector<HTMLElement>("[data-stage-footer]");
 const cookieNotice = document.querySelector<HTMLElement>("[data-cookie-notice]");
 const cookieAccept = document.querySelector<HTMLButtonElement>("[data-cookie-accept]");
-const promptLabels = ["Scroll", "Explore Partner", "Why Mopane", "Read Insights", "Start Conversation", "Footer"];
+const promptLabels = ["Scroll", "Explore Partner", "Explore Why Us", "Read Insights", "Start Conversation", "Footer"];
 const promptAriaLabels = [
-  "Scroll to services slide",
+  "Scroll to technical partner slide",
   "Scroll to why us slide",
   "Scroll to insights slide",
   "Scroll to contact slide",
@@ -256,7 +256,7 @@ updateSlideAccessibility();
 
 if (cookieNotice && window.localStorage.getItem("mopanePrivacyNotice") !== "accepted") {
   cookieNotice.hidden = false;
-  window.setTimeout(() => cookieNotice.classList.add("is-visible"), 420);
+  window.setTimeout(() => cookieNotice.classList.add("is-visible"), 1200);
 }
 
 cookieAccept?.addEventListener("click", () => {

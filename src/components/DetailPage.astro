@@ -8,6 +8,12 @@ type Pillar = {
   text: string;
 };
 
+type Insight = {
+  date: string;
+  title: string;
+  text: string;
+};
+
 interface Props {
   pageNumber: string;
   eyebrow: string;
@@ -24,6 +30,7 @@ interface Props {
   ctaHref: string;
   nextLabel: string;
   nextHref: string;
+  insights?: readonly Insight[];
   contactForm?: boolean;
 }
 
@@ -81,6 +88,20 @@ const resolveUrl = (href: string) => {
       ))
     }
   </section>
+
+  {
+    page.insights?.length ? (
+      <section class="insight-preview" aria-label="Featured insights">
+        {page.insights.map((insight) => (
+          <article>
+            <span>{insight.date}</span>
+            <h2>{insight.title}</h2>
+            <p>{insight.text}</p>
+          </article>
+        ))}
+      </section>
+    ) : null
+  }
 
   <section class="detail-feature" aria-label={`${page.eyebrow} feature`}>
     <div>

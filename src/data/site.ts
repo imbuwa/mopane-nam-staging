@@ -9,7 +9,7 @@ export const contactDetails = {
 
 export const menuItems = [
   { label: "Home", href: "/", target: "home" },
-  { label: "Services", href: "/technical-partner/", target: "services" },
+  { label: "Technical Partner", href: "/technical-partner/", target: "technical-partner" },
   { label: "Why Us", href: "/why-us/", target: "why" },
   { label: "Insights", href: "/insights/", target: "blog" },
   { label: "Contact", href: "/contact-us/", target: "contacts" },
@@ -23,15 +23,15 @@ export const slides = [
     imageHeight: 675,
     title: "Welcome",
     body: "Welcome to Mopane Asset Management. Nurturing prosperity through disciplined stewardship.",
-    detailHref: "#services",
+    detailHref: "#technical-partner",
   },
   {
-    route: "services",
+    route: "technical-partner",
     image: "assets/optimized/technical-partner.jpg",
     imageWidth: 1280,
     imageHeight: 720,
     title: "Technical Partner",
-    body: "Get to know more about our technical partner: Fairtree Asset Management.",
+    body: "Fairtree Asset Management brings technical depth to support disciplined portfolio thinking.",
     detailHref: "/technical-partner/",
   },
   {
@@ -65,7 +65,7 @@ export const slides = [
 
 export const menuVisuals = [
   { target: "home", image: "assets/optimized/menu-corporate.jpg", width: 1800, height: 1200 },
-  { target: "services", image: "assets/optimized/technical-partner.jpg", width: 1280, height: 720 },
+  { target: "technical-partner", image: "assets/optimized/technical-partner.jpg", width: 1280, height: 720 },
   { target: "why", image: "assets/optimized/brand-guideline-cover.jpg", width: 1200, height: 675 },
   { target: "blog", image: "assets/optimized/team-screenshot.jpg", width: 1400, height: 1181 },
   { target: "contacts", image: "assets/optimized/menu-corporate.jpg", width: 1800, height: 1200 },
@@ -77,29 +77,29 @@ export const detailPages = {
     eyebrow: "Technical Partner",
     title: "Depth beyond the local desk",
     summary:
-      "Mopane pairs Namibian proximity with the institutional research depth of Fairtree Asset Management, giving clients a broader investment lens without losing local accountability.",
+      "Mopane pairs Namibian proximity with the institutional research depth of Fairtree Asset Management, giving clients a broader investment lens while keeping the relationship local and accountable.",
     image: "assets/optimized/technical-partner.jpg",
     imageWidth: 1280,
     imageHeight: 720,
     intro:
-      "The right technical partner should make the investment process quieter, sharper, and more resilient. Fairtree brings established portfolio management capability, research discipline, and market infrastructure that complements Mopane's client-facing presence in Namibia.",
+      "The right technical partner should make the investment process quieter, sharper, and more resilient. Fairtree brings established portfolio management capability, research discipline, and market infrastructure, while Mopane remains close to the client relationship, local context, and practical investment needs in Namibia.",
     pillars: [
       {
         label: "Research depth",
-        text: "Access to a broader investment team and process designed to test ideas before capital is committed.",
+        text: "A wider research lens helps test investment ideas, interrogate risk, and separate durable opportunity from short-term market noise.",
       },
       {
         label: "Portfolio discipline",
-        text: "A measured approach to asset allocation, risk, and manager oversight, built for long-term compounding.",
+        text: "Technical portfolio input supports asset allocation, manager oversight, and risk awareness across changing market conditions.",
       },
       {
         label: "Local accountability",
-        text: "Mopane remains close to the client relationship, context, and practical realities of Namibian investors.",
+        text: "Mopane keeps the experience personal and locally grounded, translating technical work into clear client conversations.",
       },
     ],
     featureTitle: "A partnership designed to feel invisible",
     featureText:
-      "Clients should feel the benefit of depth, not the complexity behind it. The technical partnership supports the work in the background while Mopane keeps the experience personal, clear, and accountable.",
+      "Clients should feel the benefit of depth, not the burden of complexity. The technical partnership strengthens the work behind the scenes while Mopane keeps the experience clear, human, and accountable.",
     ctaLabel: "Start a conversation",
     ctaHref: "/contact-us/",
     nextLabel: "Why Us",
@@ -115,24 +115,24 @@ export const detailPages = {
     imageWidth: 1600,
     imageHeight: 1066,
     intro:
-      "A premium investment experience is not louder. It is calmer, more legible, and more deliberate. Mopane's role is to help clients make better decisions through patient capital, clear communication, and a process that respects risk.",
+      "A premium investment experience is not louder. It is calmer, more legible, and more deliberate. Mopane's role is to help clients make better decisions through patient capital, clear communication, local market awareness, and a process that respects risk.",
     pillars: [
       {
         label: "Namibian context",
-        text: "Decisions are made with an understanding of local families, institutions, regulation, and opportunity.",
+        text: "Advice is shaped by an understanding of local families, institutions, regulation, currency considerations, and long-term opportunity.",
       },
       {
         label: "Patient capital",
-        text: "The work favours durable outcomes over short-term theatre, with portfolios shaped around time and purpose.",
+        text: "Portfolios should be shaped around purpose, time horizon, and resilience rather than short-term theatre.",
       },
       {
         label: "Human clarity",
-        text: "Clients deserve explanations that are precise, useful, and free from unnecessary complexity.",
+        text: "Clients deserve precise explanations, plain tradeoffs, and decisions they can understand before capital is committed.",
       },
     ],
     featureTitle: "The experience should lower the temperature",
     featureText:
-      "Markets move. A considered advisor helps clients separate signal from noise, stay aligned to their objectives, and act only when action is warranted.",
+      "Markets move constantly. A considered advisor helps clients separate signal from noise, stay aligned to their objectives, and act only when action is warranted.",
     ctaLabel: "Explore insights",
     ctaHref: "/insights/",
     nextLabel: "Insights",
@@ -148,7 +148,7 @@ export const detailPages = {
     imageWidth: 1400,
     imageHeight: 1181,
     intro:
-      "The insights page should eventually become Mopane's living editorial room: concise market thinking, client education, and investment notes that build trust over time.",
+      "The insights page is Mopane's editorial room: concise market thinking, client education, and investment notes designed to build trust through clarity rather than volume.",
     pillars: [
       {
         label: "Market notes",
@@ -170,6 +170,23 @@ export const detailPages = {
     ctaHref: "/contact-us/",
     nextLabel: "Contact Us",
     nextHref: "/contact-us/",
+    insights: [
+      {
+        date: "Market Perspective",
+        title: "Reading markets without reacting to every movement",
+        text: "A note on separating useful market signals from short-term noise when portfolios are built for long-term capital.",
+      },
+      {
+        date: "Client Education",
+        title: "Why time horizon should lead the investment conversation",
+        text: "A practical look at how purpose, liquidity, and patience shape a more resilient investment plan.",
+      },
+      {
+        date: "Namibia Lens",
+        title: "Local context matters when global markets shift",
+        text: "Perspective on translating global conditions into decisions that make sense for Namibian investors.",
+      },
+    ],
   },
   contact: {
     pageNumber: "04 / 04",
@@ -181,7 +198,7 @@ export const detailPages = {
     imageWidth: 1600,
     imageHeight: 1066,
     intro:
-      "The first interaction should feel calm and direct. Share your details and the team can follow up with the appropriate next step.",
+      "The first interaction should feel calm and direct. Share your details, the nature of your enquiry, and the team can follow up with the appropriate next step.",
     pillars: [
       {
         label: "Phone",
@@ -198,7 +215,7 @@ export const detailPages = {
     ],
     featureTitle: contactDetails.company,
     featureText:
-      "Located at 1 Ardeco Offices, Nelson Mandela Avenue, Klein Windhoek, Windhoek, Namibia.",
+      "After an enquiry is received, Mopane can respond with the most appropriate next step, whether that is a short clarification, a scheduled conversation, or a more detailed discussion about investment needs.",
     ctaLabel: "E-mail Mopane",
     ctaHref: contactDetails.emailHref,
     nextLabel: "Return Home",
